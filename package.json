@@ -1,7 +1,7 @@
 {
   "name": "ves",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://alyonaudod.github.io/ves_front2/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
