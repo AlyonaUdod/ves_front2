@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { logIn, logOut, fetchCurrentUser, register } from './authOperations';
 
 const initialState = {
-  user: { name: null, email: null },
+  user: { name: '', email: '', role: '' },
   accessToken: null,
   refreshToken: null,
   isLoggedIn: false,
@@ -18,17 +18,20 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  extraReducers: builder => 
+  extraReducers: builder =>
     builder
       .addCase(register.pending, state => {
         state.authOperation = 'register';
       })
       .addCase(register.fulfilled, (state, { payload }) => {
-        // console.log(payload)
         state.authOperation = null;
-        state.user = { email: payload.email, name: payload.name };
-        state.accessToken = payload.data.accessToken;
-        state.refreshToken = payload.data.refreshToken;
+        state.user = {
+          email: payload.email,
+          name: payload.name,
+          role: payload.role,
+        };
+        state.accessToken = payload.tokens.accessToken;
+        state.refreshToken = payload.tokens.refreshToken;
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, handleRejected)
@@ -37,9 +40,13 @@ const authSlice = createSlice({
         state.authOperation = 'login';
       })
       .addCase(logIn.fulfilled, (state, { payload }) => {
-        state.user = { email: payload.email, name: payload.name };
-        state.accessToken = payload.data.accessToken;
-        state.refreshToken = payload.data.refreshToken;
+        state.user = {
+          email: payload.email,
+          name: payload.name,
+          role: payload.role,
+        };
+        state.accessToken = payload.tokens.accessToken;
+        state.refreshToken = payload.tokens.refreshToken;
         state.isLoggedIn = true;
         state.authOperation = null;
       })
@@ -56,10 +63,10 @@ const authSlice = createSlice({
         state.authOperation = null;
       })
       .addCase(logOut.rejected, handleRejected)
+
       .addCase(fetchCurrentUser.pending, state => {
         state.isFetching = true;
       })
-
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
@@ -67,6 +74,9 @@ const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.error = action.payload;
+        state.accessToken = null;
+        state.isLoggedIn = false;
+        state.authOperation = null;
         state.isFetching = false;
       }),
 });

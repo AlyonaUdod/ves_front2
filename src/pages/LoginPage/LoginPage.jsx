@@ -25,14 +25,20 @@ const LoginPage = () => {
   };
   const onFillAdministrator = () => {
     formRef.current?.setFieldsValue({
-      email: 'sometest@gmail.com',
-      password: 'sometest',
+      email: 'administrator@gmail.com',
+      password: 'admin123',
     });
   };
   const onFillManager = () => {
     formRef.current?.setFieldsValue({
       email: 'manager@gmail.com',
-      password: 'manager',
+      password: 'manager123',
+    });
+  };
+  const onFillPresenter = () => {
+    formRef.current?.setFieldsValue({
+      email: 'presenter@gmail.com',
+      password: 'presenter123',
     });
   };
 
@@ -45,6 +51,9 @@ const LoginPage = () => {
           </Button>
           <Button type="link" htmlType="button" onClick={onFillManager}>
             Manager
+          </Button>
+          <Button type="link" htmlType="button" onClick={onFillPresenter}>
+            Presenter
           </Button>
         </>
       }
