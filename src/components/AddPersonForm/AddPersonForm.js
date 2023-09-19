@@ -22,7 +22,7 @@ const AddPersonForm = () => {
 
   const onFinish = values => {
     console.log(values)
-    dispatch(addPerson(values));
+    dispatch(addPerson({ ...values, employed: values.employed ?? false }));
   };
   const onReset = () => {
     formRef.current?.resetFields();
