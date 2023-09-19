@@ -179,7 +179,7 @@ const HomePage = () => {
           width="100px"
           render={(_, record) => (
             <Space size="middle">
-              <Button type="link">Invite {user.role === 'presenter' ? record.firstName : '----'}</Button>
+              <Button type="link">Invite {user.role !== 'presenter' ? record.firstName : '----'}</Button>
             </Space>
           )}
         />
