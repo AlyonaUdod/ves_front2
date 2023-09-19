@@ -176,7 +176,7 @@ const HomePage = () => {
           key="action"
           // fixed="right"
           // width="400"
-          width="100px"
+          width="150px"
           render={(_, record) => (
             <Space size="middle">
               <Button type="link">Invite {user.role !== 'presenter' ? record.firstName : '----'}</Button>
