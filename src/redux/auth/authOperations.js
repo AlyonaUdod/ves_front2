@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { message } from 'antd';
 
 axios.defaults.baseURL = `https://ves-back.onrender.com/api`;
+// axios.defaults.baseURL = `http://localhost:3001/api`
 
 const setAuthHeader = accessToken => {
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
